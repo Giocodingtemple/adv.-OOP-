@@ -1,98 +1,82 @@
-from datetime import datetime as dt
+from datetime import date
 
+today = date.today()
 
-class User():
-    def __init__(self, first_name, last_name, email, id):
-            self.first_name = first_name
-            self.last_name = last_name
-            self.email = email 
-            self.id = id
-            self.created_on = dt.now().strftime("%c")
-
-    @property
-    def full_name(self):
-        return self.first_name + ' ' + self.last_name
+class User:
+    """User"""
+    def __init__(self, fname, last_name, email, id, hadd, seclvl, edepart, cshipping, cbilling, chistory):
+        self.fname = fname
+        self.last_name = last_name
+        self.email = email
+        self.id = id
+        self.hadd = hadd
+        self.seclvl = seclvl
+        self.edepart = edepart
+        self.cshipping = cshipping
+        self.cbilling = cbilling
+        self.chistory = chistory
         
-    def __str__(self):
-        return f'<User | {self.email}>'
 
-    def __repr__(self):
-        return f'<User | {self.email}>'
-
-    def __hash__(self):
-        return hash(self.email)
-
-    def __eq__(self, __o):                                                         
-        return self.created_on == __o.created_on
-    
-    def __lt__(self, __o):
-        return self.created_on < __o.created_on
-
-    def __gt__(self, __o):
-        return self.created_on > __o.created_on
-
-    def __le__(self, __o):
-        return self.created_on <= __o.created_on
-
-    def __ge__(self, __o):
-        return self.created_on >= __o.created_on 
-
-    def first_name_change(self):
-        self.first_name.append()
-        return input(f"new first name")
-    
-    def last_name_change(self):
-        self.last_name.append()
-        return input(f"new last name")        
-          
-class Employee(User):
-    def __init__(self, first_name, last_name, email, home_address, security_level, department, id):
-        super().__init__(self, first_name, last_name, email, id)
-        self.home_address = home_address 
-        self.security_level = security_level
-        self.department = department
-        self.created_on = dt.now().strftime("%c")
-
-    @property
-    def id(self):
-        return self.first_name + '.' + self.last_name + '.' + self.department
-
-    def department_change(self):
-        self.department.append()
-        return input(f"new department section")
-    
 class Customer(User):
-    def __init__(self, first_name, last_name, email, shipping_address, billing_address, purchase_history, id):
-        super().__init__(self, first_name, last_name, email, id)
-        self.shipping_address = shipping_address 
-        self.billing_address = billing_address
-        self.purchase_address = purchase_history 
-        self.created_on = dt.now().strftime("%c")
+    #Customer
+    def __init__(self, fname, last_name, email, id, hadd, seclvl, edepart, cshipping, cbilling, chistory):
+        super().__init__(fname, last_name, email, id, hadd, seclvl, edepart, cshipping, cbilling, chistory)
+        
+class Employee(User):
+    #Employee
+    def __init__(self, fname, last_name, email, id, hadd, seclvl, edepart, cshipping, cbilling, chistory):
+        super().__init__(fname, last_name, email, id, hadd, seclvl, edepart, cshipping, cbilling, chistory)
 
-    @property
-    def id(self):
-        return self.email + '.' + self.shipping_address
 
-    def billing_address_change(self):
-        self.billing_address.append()
-        return input(f"new billing address")
+class EmployeeInfo(Employee):
+    #Employee Info
+    def __init__(self, fname, last_name, email, id, hadd, seclvl, edepart, cshipping, cbilling, chistory):
+        super().__init__(fname, last_name, email, id, hadd, seclvl, edepart, cshipping, cbilling, chistory)
+        
+class CustomerInfo(Customer):
+    #Customer Info
+    def __init__(self, fname, last_name, email, id, hadd, seclvl, edepart, cshipping, cbilling, chistory):
+        super().__init__(fname, last_name, email, id, hadd, seclvl, edepart, cshipping, cbilling, chistory)
+       
 
-    def shipping_address_change(self):
-        self.shipping_address.append()
-        return input(f"new shipping address")
+#Fname, Lname, email, "year - not defined only instanced", ID, Home Add, Security Level, Depart, " " - empty"
+ei = EmployeeInfo("Andrea", "Harrison |", "aharrison@walkingdead.com |", "harrisonandrea,guns |", "220 Victoria Trace, Senoia, GA 30276 |", 3, "| Guns", "", "", "")
+ei2 = EmployeeInfo("Beth", "Greene |", "bgreene@walkingdead.com |", "greenebeth, morguetechician |", "220 Victoria Trace, Senoia, GA 30276 |", 5, "| Morgue technician", "", "", "")
+ei3 = EmployeeInfo("Daryl", "Dixon |", "ddixon@walkingdead.com |", "dixondaryl, crossbow's |", "220 Victoria Trace, Senoia, GA 30276 |", 4, "| Crossbow's", "", "", "")
 
-andrea = Employee("andrea", "Harrison", "aharrison@walkingdead.com", "220 Victoria Trace, Senoia, GA 30276",  3, "guns",  "harrisonandrea,guns") 
-beth = Employee("beth", "greene", "bgreene@walkingdead.com", "220 Victoria Trace, Senoia, GA 30276",  5, "Morgue technician", "greenebeth, morguetechician") 
-daryl = Employee("daryl", "dixon", "ddixon@walkingdead.com", "220 Victoria Trace, Senoia, GA 30276",  11, "crossbows", "dixondaryl, crossbows")
+#Fname, Lname, email, "year - not defined only instanced", Home Add, Shipping, Billing, History" " - empty"
+ci = CustomerInfo("Rick", "Grimes |", "rgrimes@walkingdead.com |", " rgrimes@victoriatrace", "| 220 Victoria Trace, Senoia, GA 30276 |", "", "", "220 Victoria Trace, Senoia, GA 30276 |", "220 Victoria Trace, Senoia, GA 30276 |", "Guns, Ammo, Knives |")
+ci2 = CustomerInfo("Maggie", "Rhea |", "mrhea@walkingdead.com |", " mrhea@victoriatrace", "| 220 Victoria Trace, Senoia, GA 30276 |", "", "", "220 Victoria Trace, Senoia, GA 30276 |", "220 Victoria Trace, Senoia, GA 30276 |", "Guns, Ammo, Knives |")
+ci3 = CustomerInfo("Meryl", "Dixon |", "mdixon@walkingdead.com |", " mdixon@victoriatrace", "| 220 Victoria Trace, Senoia, GA 30276 |", "", "", "220 Victoria Trace, Senoia, GA 30276 |", "220 Victoria Trace, Senoia, GA 30276 |", "Guns, Ammo, Knife Hand Attachment |")
 
-rick = Customer("rick", "grimes", "rgrimes@walkingdead.com" , "220 Victoria Trace, Senoia, GA 30276", "220 Victoria Trace, Senoia, GA 30276","guns ammo and knives", "rgrimes@victoriatrace")
-maggie = Customer("maggie", "rhea", "mrhea@walkingdead.com" , "220 Victoria Trace, Senoia, GA 30276", "220 Victoria Trace, Senoia, GA 30276", "guns ammo and knives", "mrhea@victoriatrace")
-meryl = Customer("meryl", "dixon", "mdixon@walkingdead.com" , "220 Victoria Trace, Senoia, GA 30276", "220 Victoria Trace, Senoia, GA 30276", "guns ammo and knives", "mdixon@victoriatrace")
+#print(Employee Info)
+print("---------------------------------------------------------------------------------------------------------------------------------------")
+print("Employees")
+print("---------------------------------------------------------------------------------------------------------------------------------------")
+         #first, last, email, "year", ID, HomeAddress, Security Level, Depart, empty, empty, empty
+print(ei.fname, ei.last_name, ei.email, today.year,"| Employee ID:", ei.id, ei.hadd, "Security Level:", ei.seclvl, ei.edepart, ei.cshipping, ei.cbilling, ei.chistory)
+print("---------------------------------------------------------------------------------------------------------------------------------------")
+print(ei2.fname, ei2.last_name, ei2.email, today.year,"| Employee ID:", ei2.id, ei2.hadd, "Security Level:", ei2.seclvl, ei2.edepart, ei2.cshipping, ei2.cbilling, ei2.chistory)
+print("---------------------------------------------------------------------------------------------------------------------------------------")
+print(ei3.fname, ei3.last_name, ei3.email, today.year,"| Employee ID:", ei3.id, ei3.hadd, "Security Level:", ei3.seclvl, ei3.edepart, ei3.cshipping, ei3.cbilling, ei3.chistory)
+print("---------------------------------------------------------------------------------------------------------------------------------------")
 
-print(andrea.full_name)
-print(beth.full_name)
-print(daryl.full_name)
+#Space Seperation
+print("")
+print("")
+print("")
+print("")
+print("")
+print("")
 
-print(rick.full_name)
-print(maggie.full_name)
-print(meryl.full_name)
+#print(Customer Info)
+print("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+print("Customer")
+print("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+        #first, last, email, "year", empty, HomeAddress, empty, empty, Shipping, Billing, History.
+print(ci.fname, ci.last_name, ci.email, today.year, "| Customer ID:", ci.id, ci.hadd, ci.seclvl, ci.edepart, ci.cshipping, ci.cbilling, ci.chistory)
+print("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+print(ci2.fname, ci2.last_name, ci2.email, today.year,"| Customer ID:", ci2.id, ci2.hadd, ci2.seclvl, ci2.edepart, ci2.cshipping, ci2.cbilling, ci2.chistory)
+print("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+print(ci3.fname, ci3.last_name, ci3.email, today.year,"| Customer ID:", ci3.id, ci3.hadd, ci3.seclvl, ci3.edepart, ci3.cshipping, ci3.cbilling, ci3.chistory)
+print("------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
